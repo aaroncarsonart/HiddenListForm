@@ -1,0 +1,56 @@
+ href="SearchExample.html" title="SearchExample"<html>
+<head>
+    <title>Two Forms Form Example</title>
+    <link rel="stylesheet" type="text/css" href="css/my-style.css"/>
+</head>
+
+<body>
+<h1>Multi-Value Form Example</h1>
+<p>
+    This is designed to allow the user to input a variable number of values into a single form.
+    Type some text into the form, then type <b>enter</b>.
+</p>
+<p>
+    The text will show up below in boxes.  This also adds a hidden input with the name 'tags'.
+    Then, press <b>submit</b> and see that all entered values are passed as a form
+    in the url.
+</p>
+
+<form id="my-custom-form-id">
+    <label>Cats</label>
+    <input id="cats-input" type="text" autocomplete="off" placeholder="Type a phrase then enter" size="30"/>
+    <div id="cats-div"></div>
+    <br />
+
+    <label>Food</label>
+    <input id="food-input" type="text" autocomplete="off" placeholder="Type a phrase then enter" size="30"/>
+    <div id="food-div"></div><a href="MultiValueFormExample.html" id="" title="MultiValueFormExample">MultiValueFormExample</a>
+    <br />
+
+    <input id="submit" type="submit" value="Submit" />
+</form>
+
+<script src="js/hidden-form-controls.js"></script>
+<script>
+    window.onload = function () {
+        var hiddenFormControls = new HiddenFormControls();
+
+        // declare some values I'm using.
+        var formId = 'my-custom-form-id';
+        var catsName = 'cats';
+        var foodName = 'food';
+        var catsClass = 'tag-style cat-style';
+        var foodClass = 'tag-style food-style';
+
+        // add any matching parameters.
+        hiddenFormControls.addUrlParametersHiddenInputAndTag(formId, catsName, catsClass);
+        hiddenFormControls.addUrlParametersHiddenInputAndTag(formId, foodName, foodClass);
+
+        // register inputs to add values to the corresponding input name.
+        hiddenFormControls.registerHiddenInputFor(formId, catsName, catsClass);
+        hiddenFormControls.registerHiddenInputFor(formId, foodName, foodClass);
+    }
+</script>
+	
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Search Dropdown Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/my-style.css"/>
+</head>
+<body>
+	<div class="row">
+		<div class="col-md-offset-2 col-md-10">
+			<h1>Search Dropdown Example</h1>
+			<hr>
+			<p>
+				This is an example of how to search through a hidden list and
+				display results.
+			</p>
+		</div>
+	</div>
+
+    <!-- FORM -->
+	<form id="my-search-form-id">
+		<div class="form-horizontal">			
+			<div class="form-group">
+				
+				<!-- LABEL -->
+				<label class="control-label col-md-2">Tags</label>
+			    <div class="col-md-10">
+			        <div class="dropdown btn-group">
+						<div class="input-group">
+							<span class="input-group-btn">
+								<input id='tags-value' name='tags' type='hidden' value=""/>	
+								
+								<!-- SEARCH -->						
+								<input id="tags-input" class="form-control search-input" tabindex="1" data-toggle="dropdown" aria-expanded="true" type="input" placeholder="type something" autocomplete="off">
+
+								<!-- DROPDOWN LIST -->
+								<ul id="tags-list" class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="search-input">
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Add new</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Alabama</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Alaska</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Arizona</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Arkansas</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">California</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Colorado</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Connecticut</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Delaware</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Florida</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Georgia</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Hawaii</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Idaho</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Illinois</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Indiana</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Iowa</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Kansas</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Kentucky</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Louisiana</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Maine</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Maryland</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Massachusetts</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Michigan</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Minnesota</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Mississippi</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Missouri</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Montana</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Nebraska</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Nevada</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">New Hampshire</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">New Jersey</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">New Mexico</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">New York</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">North Carolina</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">North Dakota</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Ohio</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Oklahoma</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Oregon</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Pennsylvania</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Rhode Island</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">South Carolina</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">South Dakota</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Tennessee</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Texas</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Utah</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Vermont</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Virginia</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Washington</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">West Virginia</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Wisconsin</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="">Wyoming</a></li>
+								</ul>
+
+								<!-- DROPDOWN-BUTTON -->
+								<button id="tags-dropdown-button" class="btn btn-default" type="button" data-toggle="dropdown" aria-expanded="true">
+							 		<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+								</button>
+							</span>
+						</div>
+			        </div>
+				</div>
+			</div>
+			
+			<!-- SUBMIT -->
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+					<input id="submit" class="btn btn-default" type="submit" value="Submit" />
+		        </div>
+		    </div>
+		
+		</div>
+	</form>
+
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/hidden-list-search.js"></script>
+
+	<script>
+	var hiddenListSearch = new HiddenListSearch();
+	//hiddenListSearch.registerInputListeners('tags-input', 'tags-list', 'tags-dropdown-button', 'tags-value');
+	hiddenListSearch.registerInputListenersFor('tags');
+	//hiddenListSearch.registerManyListeners('tags-input');
+	</script>
+	
+</body>
+</html>

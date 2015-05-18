@@ -1,0 +1,90 @@
+body {
+	font-family:sans-serif;
+	margin:15px 50px;
+}
+
+form {
+	font-family: monospace;
+}
+
+/* Used to hide non-matching search results. */
+.hidden {
+	display: none;
+}
+
+/******************************************
+A nice floating shadow box that mimics
+dropdown menus.
+******************************************/
+.search-results{
+	list-style-type: none;
+    position:relative;
+    z-index: 1000;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, .175);	
+}
+
+/* Make a ul scrollable. */
+.scrollable-menu {
+	height: auto;
+	max-height: 195px;
+	overflow-x:hidden;
+}
+
+.search-input{
+	max-width:500px;	
+}
+
+/******************************************
+Formatting to layout a "tag" span properly
+******************************************/
+.tag-style {
+    display: inline-block;
+    padding: .3em .7em .4em;
+    margin: 2px;
+    font-size: 75%;
+    font-weight: lighter;
+    line-height: 1;
+	background: rgba(100, 100, 100, 0.40);
+    color: #ffffff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+
+/* Unique coloring for cat tags. */
+.cat-style {
+    background: rgba(255, 0, 0, 0.40);
+}
+
+/* Unique coloring for food tags. */
+.food-style {
+    background: rgba(0, 0, 255, 0.40);
+}
+
+/* Special styling for cancel button of a tag. */
+.tag-style a.a-cancel {
+    color: #ddd;
+    font-weight: bold;
+    margin: 0em 0.4em 0em 0em;
+    padding: 0em;
+    text-decoration: none;
+}
+
+.tag-style a.a-cancel:hover {
+        color: #fff;
+}
