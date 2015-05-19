@@ -153,7 +153,10 @@
 	};	
 	
 	// register the search input listeners.
-    hiddenListSearch.registerInputListenersFor(tagName, addTag);	
+    hiddenListSearch.registerInputListenersFor(tagName, addTag);
+	hiddenListSearch.setShowElementCondition(function(input){
+		return !hiddenFormControls.tagWithValueExists(input, tagName);
+	});	
 	
 	</script>
 	

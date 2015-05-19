@@ -48,6 +48,7 @@ function HiddenFormControls() {
         a.setAttribute('href', '');
         a.setAttribute('class', 'a-cancel');
         a.setAttribute('title', 'remove');
+		a.setAttribute('tabindex', '-1');
         a.innerHTML = "&#10005;";
         a.onclick = function () {
             removeElement(getSpanId(inputName, index));
@@ -166,9 +167,9 @@ function HiddenFormControls() {
 		var inputDiv =  document.getElementById(inputName + '-div');
 		var children = inputDiv.children;
 		var childrenCount = children.length;
-		console.log('childrenCount: ' + childrenCount);
+		//console.log('childrenCount: ' + childrenCount);
 		for(var i = 0; i < childrenCount; i ++) {
-			console.log('tagWithValueExists: ' + i);
+			//console.log('tagWithValueExists: ' + i);
 			var span = children[i];
 			var text = span.children[1];
 			//console.log(" child2: " + text.tagName + " innerHTML" + text.innerHTML);

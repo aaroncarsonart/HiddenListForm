@@ -9,14 +9,41 @@ It works!  Now I just have to combine hidden-list-search with hidden-form-contro
 function HiddenListSearch(){
 	var hidden = 'hidden';
 	var self = this;
-	var dropdownFocused = false;	
+	var dropdownFocused = false;
+	
 	// TODO include this if I need more than one dropdown???
 	var dropdownFocusedId  = "";
+	var showElementCondition = null;
+	var enterKeyDown = false;
+	var enterKeyReleased = true;
+	
+	// ****************************************************
+	// Set the value of the showElementCondition.
+	// ****************************************************
+	this.setShowElementCondition = function(newFunction) {
+		showElementCondition = newFunction;
+	}
+	
+	// ****************************************************
+	// Get the value of the showElementCondition.
+	// (sets it to default if uninitialized)
+	// ****************************************************
+	this.getShowElementCondition = function(newFunction) {
+		// determine onClickFunction
+		if(typeof showElementCondition === 'undefined' ||
+		   typeof showElementCondition != 'function') {
+			console.log("search() - helper not a function, setting default");
+			showElementCondition = function(listValue){
+				return true;
+			}
+		}
+		return showElementCondition;
+	}
 	
 	// ************************************************************
 	// Set the class of an element with the id to contain .hidden.
 	// ************************************************************
-	this.show = function(elem){
+	this.show = function(elem) {
 		var elemClassName = elem.className;
 		var index = (' ' + elemClassName + ' ').indexOf(hidden);
 		
@@ -73,6 +100,8 @@ function HiddenListSearch(){
 	// menu.
 	// ************************************************************
 	function search(inputValue, listId){
+		var showCondition = self.getShowElementCondition();
+		
 		var ul = document.getElementById(listId);
 		var query = inputValue.toLowerCase();
 		
@@ -90,7 +119,7 @@ function HiddenListSearch(){
 			//console.log(i + ' queryIndex: ' + queryIndex);
 
 			// 2. if it starts with the query, set the LI to visible.
-			if(queryIndex == 0) {
+			if(queryIndex == 0 && showCondition(a.innerHTML)) {
 				self.show(li);
 			}
 
@@ -132,6 +161,7 @@ function HiddenListSearch(){
 			var inputElement = document.getElementById(inputId);
 		    var selectedValue = inputElement.value;
 			inputElement.value = "";
+			search("", listId);
 			//setHiddenInputValue(selectedValue, hiddenInputId);
 			onClickFunction(selectedValue);
 			inputElement.focus();
@@ -154,6 +184,8 @@ function HiddenListSearch(){
 				dropdownFocused = false;
 				console.log('set dropdownFocused: ' + dropdownFocused);
 				var inputElement = document.getElementById(inputId);
+				inputElement.value = "";
+				search("", listId);
 				inputElement.focus();
 			}
 			
@@ -205,6 +237,7 @@ function HiddenListSearch(){
 	
 	function getFirstVisibleListElement(
 		inputValue, listId, hiddenInputId) {
+		var showCondition = self.getShowElementCondition();
 		var ul = document.getElementById(listId);
 		var query = inputValue.toLowerCase();
 		
@@ -221,7 +254,7 @@ function HiddenListSearch(){
 			var queryIndex =listValue.toLowerCase().indexOf(query);
 		
 			// 2. get the first match (the first visible element)
-			if(queryIndex == 0) {
+			if(queryIndex == 0 && showCondition(listValue)) {
 				return li;
 			}
 			else{
@@ -245,6 +278,7 @@ function HiddenListSearch(){
 	                                      onClickFunction) {
 		var ul = document.getElementById(listId);
 		var query = inputValue.toLowerCase();
+		var showCondition = self.getShowElementCondition();
 		
 		// 1. Walk the LI elements of the drop down.  
 		var nodes = ul.getElementsByTagName('LI');
@@ -259,7 +293,7 @@ function HiddenListSearch(){
 			var queryIndex =listValue.toLowerCase().indexOf(query);
 			
 			// 2. click the first match (the first visible element)
-			if(queryIndex == 0) {
+			if(queryIndex == 0 && showCondition(listValue, listId)) {
 				a.click();
 				break;
 			}
@@ -327,14 +361,30 @@ function HiddenListSearch(){
 		inputElement.addEventListener('keypress', function(event) {
 			// ENTER key pressed.
 			if(event.keyCode == 13) {
-				var inputValue = inputElement.value;
+				
+				// consume the event.
 				event.preventDefault();	
-				clickFirstVisibleListElement(
-					inputValue, listId, onClickFunction);
+								
+				// only continue one per key release.
+				if(enterKeyDown && enterKeyReleased) {
 					
-				// return list to default state (all visible) 
-				inputElement.value = "";
-		 		search(inputElement.value, listId);				
+					if(inputElement.getAttribute('aria-expanded') == "false") {
+						showDropdownMenuIfHidden(inputElement);
+					
+					}
+					else{
+						var inputValue = inputElement.value;
+						clickFirstVisibleListElement(
+							inputValue, listId, onClickFunction);	
+					
+						// return list to default state (all visible) 
+						inputElement.value = "";
+						search(inputElement.value,listId);							
+					}
+					
+					enterKeyDown = false;
+					enterKeyReleased = false;		
+				}
 			}    
 		});
 		
@@ -346,7 +396,7 @@ function HiddenListSearch(){
 			
 			// DOWN arrow key pressed.
 			if(event.keyCode == 40) {
-				console.log("down arrow key pressed");
+				console.log("down arrow key down");
 		 		event.preventDefault();
 				//var dropdown = document.getElementById(listId);
 				//dropdown.focus();
@@ -359,16 +409,30 @@ function HiddenListSearch(){
 			
 			// ESCAPE key pressed.
 			else if(event.keyCode == 27){
-				console.log("escape key pressed");
+				console.log("escape key down");
 				hideDropdownMenuIfVisible(inputElement);
 			}
 			
 			// TAB key pressed.
 			else if(event.keyCode == 9){
-				console.log("TAB key pressed");
+				console.log("TAB key down");
 				hideDropdownMenuIfVisible(inputElement);
 			}
 			
+			// ENTER key pressed.
+			if(event.keyCode == 13) {
+				console.log("TAB key down");
+				enterKeyDown = true;		
+			}    
+		});
+		
+		// 3.) handle KEYUP		
+		inputElement.addEventListener('keyup', function(event) {
+			// ENTER key pressed.
+			if(event.keyCode == 13) {
+				console.log("ENTER key released");
+				enterKeyReleased = true;		
+			}    
 		});
 		
 		// ***********************************
