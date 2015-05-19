@@ -187,11 +187,11 @@ function HiddenFormControls() {
 			
 			// add the tag if it doesn't already exist.
 			if (!hiddenFormControls.tagWithValueExists(tagValue, tagName)) {
-				console.log('tag with value: "' + tagValue + '" was NOT found.');
+				// console.log('tag with value: "' + tagValue + '" was NOT found.');
 	            self.addHiddenInputAndTag(formId, inputName, tagValue, spanClass);
 			}
 			else {
-				console.log('tag with value: "' + tagValue + '" was found.');
+				// console.log('tag with value: "' + tagValue + '" was found.');
 			}
         }
             // 3) b. add each tag separated by commas.
@@ -204,11 +204,11 @@ function HiddenFormControls() {
 					
 					// add if tag does not already exist.
 					if (!hiddenFormControls.tagWithValueExists(delimitedValue, tagName)) {
-						console.log('tag with value: "' + delimitedValue + '" was NOT found.');
+						// console.log('tag with value: "' + delimitedValue + '" was NOT found.');
 	                    self.addHiddenInputAndTag(formId, inputName, delimitedValue, spanClass);
 					}
 					else {
-						console.log('tag with value: "' + delimitedValue + '" was found.');
+						// console.log('tag with value: "' + delimitedValue + '" was found.');
 					}
                 }
             }

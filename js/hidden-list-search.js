@@ -33,7 +33,7 @@ function HiddenListSearch(){
 		// determine onClickFunction
 		if(typeof showElementCondition === 'undefined' ||
 		   typeof showElementCondition != 'function') {
-			console.log("search() - helper not a function, setting default");
+			// console.log("search() - helper not a function, setting default");
 			showElementCondition = function(listValue){
 				return true;
 			}
@@ -75,23 +75,23 @@ function HiddenListSearch(){
 				
 		// 1.) handle KEYPRESS
 		inputElement.addEventListener('keypress', function(event) {
-			console.log("keypress: "+String.fromCharCode(event.keyCode));
+			// console.log("keypress: "+String.fromCharCode(event.keyCode));
 			event.preventDefault();		 					
 		});
 		
 		// 2.) handle KEYDOWN
 		inputElement.addEventListener('keydown', function(event) {
-			console.log("keydown: "+String.fromCharCode(event.keyCode));
+			// console.log("keydown: "+String.fromCharCode(event.keyCode));
 		});
 
 		// 3.) handle KEYUP		
 		inputElement.addEventListener('keyup', function(event) {
-			console.log("keyup: "+String.fromCharCode(event.keyCode));
+			// console.log("keyup: "+String.fromCharCode(event.keyCode));
 		});
 		
 		// 4.) handle INPUT
 		inputElement.addEventListener('input', function(event){
-			console.log("input: " + inputElement.value);
+			// console.log("input: " + inputElement.value);
 		});
 	}
 				
@@ -183,7 +183,7 @@ function HiddenListSearch(){
 				//setHiddenInputValue(selectedValue, hiddenInputId);
 				onClickFunction(selectedValue);
 				dropdownFocused = false;
-				console.log('set dropdownFocused: ' + dropdownFocused);
+				// console.log('set dropdownFocused: ' + dropdownFocused);
 				var inputElement = document.getElementById(inputId);
 				inputElement.value = "";
 				search("", listId);
@@ -192,9 +192,9 @@ function HiddenListSearch(){
 			
 			
 			a.addEventListener('focus', function(){
-				console.log('a.onfocus()');
+				// console.log('a.onfocus()');
 				dropdownFocused = true;
-				console.log('set dropdownFocused: ' + dropdownFocused);
+				// console.log('set dropdownFocused: ' + dropdownFocused);
 				//var inputElement = document.getElementById(inputId);
 				//inputElement.focus();
 				//return false;
@@ -338,7 +338,7 @@ function HiddenListSearch(){
 				
 		self.registerInputListeners(inputId, listId, dropdownButtonId, hiddenInputId, onClickFunction);
 		self.registerListOnClick(inputId, listId, hiddenInputId, onClickFunction);
-		console.log('dropdownFocused: ' + dropdownFocused);	
+		// console.log('dropdownFocused: ' + dropdownFocused);	
 	}
 	
 	// ************************************************************
@@ -355,6 +355,18 @@ function HiddenListSearch(){
 		    hiddenInputId    + '")');
 		
 		var inputElement = document.getElementById(inputId);
+		var button = document.getElementById(dropdownButtonId);
+		
+
+		button.addEventListener('focusin', function(e) {			
+			// console.log("button on click");		
+			search(inputElement.value, listId);
+		});
+		
+		inputElement.addEventListener('click', function(e) {			
+			// console.log("input on click");		
+			search(inputElement.value, listId);
+		});
 		
 		// **************************************
 		// 1.) handle KEYPRESS for input element
@@ -393,11 +405,11 @@ function HiddenListSearch(){
 		// 2.) handle KEYDOWN for input element
 		// **************************************
 		inputElement.addEventListener('keydown', function(event) {
-			console.log('keydown');
+			// console.log('keydown');
 			
 			// DOWN arrow key pressed.
 			if(event.keyCode == 40) {
-				console.log("down arrow key down");
+				// console.log("down arrow key down");
 		 		event.preventDefault();
 				//var dropdown = document.getElementById(listId);
 				//dropdown.focus();
@@ -410,19 +422,19 @@ function HiddenListSearch(){
 			
 			// ESCAPE key pressed.
 			else if(event.keyCode == 27){
-				console.log("escape key down");
+				// console.log("escape key down");
 				hideDropdownMenuIfVisible(inputElement);
 			}
 			
 			// TAB key pressed.
 			else if(event.keyCode == 9){
-				console.log("TAB key down");
+				// console.log("TAB key down");
 				hideDropdownMenuIfVisible(inputElement);
 			}
 			
 			// ENTER key pressed.
 			if(event.keyCode == 13) {
-				console.log("TAB key down");
+				// console.log("TAB key down");
 				enterKeyDown = true;		
 			}    
 		});
@@ -431,7 +443,7 @@ function HiddenListSearch(){
 		inputElement.addEventListener('keyup', function(event) {
 			// ENTER key pressed.
 			if(event.keyCode == 13) {
-				console.log("ENTER key released");
+				// console.log("ENTER key released");
 				enterKeyReleased = true;		
 			}    
 		});
@@ -450,7 +462,7 @@ function HiddenListSearch(){
 		//     when dropdown is made visible
 		// ***********************************
 		$(document).on('shown.bs.dropdown', function(event) {
-			console.log("'shown.bs.dropdown' event");
+			// console.log("'shown.bs.dropdown' event");
 			//var dropdown = event.target;
 			inputElement.focus();
 		});
@@ -459,38 +471,28 @@ function HiddenListSearch(){
 		// 4.) switch focus to input element
 		//     when button is focused
 		// ***********************************
-		var button = document.getElementById(dropdownButtonId);
 		button.addEventListener('focus', function(e) {			
 			//console.log("button 'focus' event.  activeElement: " + document.activeElement.nodeName);
-			console.log("(button 'focus' event) value of dropdownFocused: " + dropdownFocused);
+			// console.log("(button 'focus' event) value of dropdownFocused: " + dropdownFocused);
 			 $(window).keyup(function (e) {
 				var code = (e.keyCode ? e.keyCode : e.which);
 				
 				// handle tab.
 				if (code == 9 && dropdownFocused) {
-					console.log('keycode: tab');
+					// console.log('keycode: tab');
 					inputElement.focus();
 					hideDropdownMenuIfVisible(inputElement);
 					dropdownFocused = false;
-					console.log('set dropdownFocused: ' + dropdownFocused);
+					// console.log('set dropdownFocused: ' + dropdownFocused);
 				}
 				
 				// handle escape.
 				else if (code == 27){
-					console.log('keycode: escape');
+					// console.log('keycode: escape');
 					inputElement.focus();
 				}
 			});			
 		});
-		
-		/*
-		button.addEventListener('focusin', function(e) {			
-			console.log("button 'focusin' event.  activeElement: " + document.activeElement.nodeName);		
-		});
-		button.addEventListener('focusout', function(e) {			
-			console.log("button 'focusout' event.  activeElement: " + document.activeElement.nodeName);		
-		});
-		*/
 			 
 		// ***********************************
 		// 5.) ensure first list element is is
