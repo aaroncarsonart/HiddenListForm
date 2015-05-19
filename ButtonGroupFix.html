@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Combined Multi-Value Form/Search Dropdown Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/my-style.css"/>
+</head>
+<body>
+	<div class="row">
+		<div class="col-md-offset-2 col-md-10">
+			<h1>Combined Example</h1> 
+			<h3>Multi-Value Form &amp; Search Dropdown</h1>
+			<hr>
+			<p>
+				This is my example of how to combine 
+				<b>hidden-form-controls.js</b> and
+				<b>hidden-list-search.js</b> into a single html form.
+				This allows for a form that a user can add one or more
+				values, and each unique value appears as a cancellable
+				tag.  These are then submitted with the form all under
+				the same input name.
+			</p>
+			<p>
+				This can be used for multiple input on the same 
+				page by providing unique id's for each required
+				element and a unique name for each input value.
+			</p>
+		</div>
+	</div>
+
+    
+
+<!-- FORM -->
+<form id="my-search-form-id">
+    <div class="form-horizontal">
+
+        <!-- TAGS -->
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div id="tags-div"></div>
+            </div>
+        </div>
+
+        <div class="form-group">
+
+  <div class="col-lg-6">
+    <div class="input-group">
+      <input id="tags-input" type="text" class="form-control">
+      <div class="input-group-btn">
+        <button id="tags-dropdown-button" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Action <span class="caret"></span></button>
+        <ul id="tags-list" class="dropdown-menu dropdown-menu-right" role="menu">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+        </div>
+
+        <!-- SUBMIT -->
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="submit" class="btn btn-default" type="submit" value="Submit" />
+            </div>
+        </div>
+
+    </div>
+</form>
+
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/hidden-list-search.js"></script>
+	<script src="js/hidden-form-controls.js"></script>
+
+	<script>	
+	var formId = 'my-search-form-id';
+	var tagName = 'tags';
+	var tagClass = 'tag-style food-style';
+
+	var hiddenListSearch = new HiddenListSearch();		
+    var hiddenFormControls = new HiddenFormControls();	
+	
+	// load the tags from matching url values.
+	hiddenFormControls.addUrlParametersHiddenInputAndTag(formId, tagName, tagClass);
+	
+	// custom onClickFunction for hiddenListSearch
+	var addTag = function(inputValue){
+		hiddenFormControls.addTagParseCommasForceUnique(formId, tagName, inputValue, tagClass);			
+	};	
+	
+	// register the search input listeners.
+    hiddenListSearch.registerInputListenersFor(tagName, addTag);	
+	
+	</script>
+	
+</body>
+</html>

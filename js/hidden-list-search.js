@@ -1,6 +1,7 @@
 /******************************************************************
 HiddenSearchList
-*******************************************************************This allows for a field to search through a hidden list, and then show the
+*******************************************************************
+This allows for a field to search through a hidden list, and then show the
 matching results.
 
 It works!  Now I just have to combine hidden-list-search with hidden-form-controls.
@@ -532,5 +533,10 @@ function HiddenListSearch(){
 			}
 			//btnSpan.setAttribute('class', btnSpan.className += ' open');
 		}
+	}
+	
+	// initialize the dropdown results based on what tags are already present on page load.
+	this.initializeSearchResults = function(inputName){				
+		search("", inputName + '-list');
 	}
 }
